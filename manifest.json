@@ -1,0 +1,49 @@
+{
+  "manifest_version": 3,
+  "name": "NabeWise",
+  "version": "1.2.0",
+  "description": "See the official NabeWise neighborhood behind a listing. Eight U.S. cities. Not a listings tool.",
+  "homepage_url": "https://nabewise.com",
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "action": {
+    "default_title": "NabeWise 1.2",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": ["storage", "activeTab"],
+  "host_permissions": ["https://nabewise.com/*"],
+  "optional_host_permissions": [
+    "https://www.zillow.com/*",
+    "https://www.zillow.com.au/*",
+    "https://streeteasy.com/*",
+    "https://www.apartments.com/*",
+    "https://hotpads.com/*",
+    "https://www.realtor.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.zillow.com/*",
+        "https://streeteasy.com/*",
+        "https://www.apartments.com/*",
+        "https://hotpads.com/*",
+        "https://www.realtor.com/*"
+      ],
+      "js": ["nabe-index.js", "matcher.js", "content.js"],
+      "css": ["content.css"],
+      "run_at": "document_idle"
+    }
+  ]
+}
